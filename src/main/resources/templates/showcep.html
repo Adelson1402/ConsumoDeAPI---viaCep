@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<script>
+function SomenteNumero(e){
+    var tecla=(window.event)?event.keyCode:e.which;   
+    if((tecla>47 && tecla<58)) return true;
+    else{
+    	if (tecla==8 || tecla==0) return true;
+	else  return false;
+    }
+}
+</script>
+
+<meta charset="UTF-8">
+<title>mostrando o cep</title>
+</head>
+<body>
+
+<h1 align="center">CONSULTA DE CEP!</h1>
+<form method="get" action="showcepp">
+ <label>DIGITE O CEP:</label><br>
+ <input type="text" name="cxCep" minlength="8" maxlength="8" onkeypress="return SomenteNumero(event)" autocomplete="off" required><br>
+ <br>
+ <input type="submit" value="enviar"/>
+ 
+
+</form>
+<hr>
+<label>Rua:</label>
+<label th:text="${viacepRua}"></label>
+<br>
+<label>Bairro:</label>
+<label th:text="${viacepBairro}"></label>
+<br>
+<label>Cidade:</label>
+<label th:text="${viacepCidade}"></label>
+<hr>
+<h4>Consumo da API externa viaCep, enviando valores e pegando dados do JSON e os exibindo na tela HTML</h4>
+<h4>Por Adelson dos Santos Pinheiro</h4>
+</body>
+
+</html>
