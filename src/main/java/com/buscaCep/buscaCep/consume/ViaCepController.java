@@ -8,9 +8,10 @@ import java.util.Scanner;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,13 +20,15 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.buscaCep.buscaCep.model.ViaCepEntity;
 
+import repository.ViaCepRepository;
+
 
 @Controller
 public class ViaCepController {
  
 	Scanner scan = new Scanner(System.in);
 	
-	@RequestMapping(value="/showcep")
+	@RequestMapping(value="/")
 	public String showcep() {
 		return "showcep";
 		
@@ -33,11 +36,12 @@ public class ViaCepController {
 	
 	
 	
-
+   @Autowired(required=false)
+   private ViaCepRepository vcr;
 
 
 @RequestMapping(value="/showcepp")
-public ModelAndView consumeAPI(HttpServletRequest request, HttpServletResponse response ) throws IOException {
+public ModelAndView consumeAPI(HttpServletRequest request, HttpServletResponse response) throws IOException {
 	
 //Pega os parametros do front e os trata
 	response.getWriter().append("").append(request.getContextPath());
@@ -57,6 +61,7 @@ public ModelAndView consumeAPI(HttpServletRequest request, HttpServletResponse r
 			.build();
 	
 	ResponseEntity<ViaCepEntity> vceEntity = template.getForEntity(uri.toString(), ViaCepEntity.class);
+	//captura as informações do JSON em uma variável e depois as mesmas são adicionadas como objetos pelo MVC
 	String cepRua = vceEntity.getBody().getLogradouro();
 	String cepBairro = vceEntity.getBody().getBairro();
 	String cepCidade = vceEntity.getBody().getLocalidade();
@@ -67,14 +72,20 @@ public ModelAndView consumeAPI(HttpServletRequest request, HttpServletResponse r
 		
 	}
 	mvc.addObject("viacepRua", cepRua);
+	mvc.addObject("logradouro", cepRua);
+    mvc.addObject("viacepBairro", cepBairro);
 	mvc.addObject("viacepBairro", cepBairro);
 	mvc.addObject("viacepCidade", cepCidade);
+    
 	System.out.println(vceEntity.getBody().getLogradouro());
+	
+	
 	return mvc;
 	
 	//
 	
 }
+
 
 	
 }

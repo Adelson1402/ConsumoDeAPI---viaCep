@@ -1,0 +1,35 @@
+ 
+body{
+	background-color: #ADD8E6;
+	
+}
+
+#centro{
+	margin-left: 45%;
+	margin-top: 5%;
+	width: 200px;
+    height: 100px;
+	
+	
+}
+
+.inputs{
+	
+	color: red;
+	width: 300px;
+	
+}
+
+#footer{
+	margin-top: 500px;
+	margin-left: 450px;
+	
+	
+	
+}
+
+#borda{
+	border: solid red;
+	
+	
+}

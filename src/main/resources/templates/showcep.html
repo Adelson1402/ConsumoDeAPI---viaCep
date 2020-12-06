@@ -13,32 +13,40 @@ function SomenteNumero(e){
 }
 </script>
 
+<link href="/style.css" type="text/css" rel="stylesheet"/>
 <meta charset="UTF-8">
 <title>mostrando o cep</title>
 </head>
 <body>
-
+<div id="borda">
 <h1 align="center">CONSULTA DE CEP!</h1>
-<form method="get" action="showcepp">
+<div id="centro">
+<form method="get" action="showcepp" >
  <label>DIGITE O CEP:</label><br>
- <input type="text" name="cxCep" minlength="8" maxlength="8" onkeypress="return SomenteNumero(event)" autocomplete="off" required><br>
+ <input type="text" name="cxCep" minlength="8" maxlength="8" onkeypress="return SomenteNumero(event)" autocomplete="off" required autofocus="autofocus"><br>
  <br>
  <input type="submit" value="enviar"/>
  
 
 </form>
-<hr>
+
+
+
+
 <label>Rua:</label>
-<label th:text="${viacepRua}"></label>
-<br>
+<input class="inputs" th:value="${viacepRua}"></input>
+
 <label>Bairro:</label>
-<label th:text="${viacepBairro}"></label>
-<br>
+<input class="inputs" th:value="${viacepBairro}"></input>
+
 <label>Cidade:</label>
-<label th:text="${viacepCidade}"></label>
-<hr>
+<input class="inputs" th:value="${viacepCidade}"></inputl>
+</div>
+</div>
+<div id="footer">
 <h4>Consumo da API externa viaCep, enviando valores e pegando dados do JSON e os exibindo na tela HTML</h4>
 <h4>Por Adelson dos Santos Pinheiro</h4>
+</div>
 </body>
 
 </html>
